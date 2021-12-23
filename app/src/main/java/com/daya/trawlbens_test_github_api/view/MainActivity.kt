@@ -1,7 +1,8 @@
-package com.daya.trawlbens_test_github_api
+package com.daya.trawlbens_test_github_api.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.daya.trawlbens_test_github_api.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
