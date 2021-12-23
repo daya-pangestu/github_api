@@ -55,10 +55,6 @@ dependencies {
     implementation 'de.hdodenhof:circleimageview:3.1.0'
     implementation 'com.faltenreich:skeletonlayout:4.0.0'
 
-    //search
-    implementation 'io.github.lapism:search:1.1.0'
-
-
     //retrofit
     implementation "com.squareup.retrofit2:retrofit:2.9.0"
     implementation "com.squareup.retrofit2:converter-gson:2.9.0"

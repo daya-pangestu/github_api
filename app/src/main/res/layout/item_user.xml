@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    >
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/img_profile"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/tv_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/img_profile"
+        app:layout_constraintStart_toEndOf="@id/img_profile"
+        app:layout_constraintTop_toTopOf="@id/img_profile"
+        app:layout_constraintVertical_bias="0.2"
+        tools:text="wang guan" />
+
+    <TextView
+        android:id="@+id/tv_account"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="@id/tv_name"
+        app:layout_constraintTop_toBottomOf="@id/tv_name"
+        tools:text="---wangguan" />
+
+    <TextView
+        android:id="@+id/tv_bio"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="16dp"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/tv_account"
+        app:layout_constraintTop_toBottomOf="@id/tv_account"
+        app:layout_constraintVertical_bias="0"
+        tools:text="@tools:sample/lorem/random" />
+
+    <ImageView
+
+        android:id="@+id/img_people"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="16dp"
+        android:src="@drawable/ic_baseline_people_outline_24"
+        app:layout_constraintStart_toStartOf="@id/tv_bio"
+        app:layout_constraintTop_toBottomOf="@id/tv_bio" />
+
+    <TextView
+        android:id="@+id/tv_follow_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.1"
+        app:layout_constraintStart_toEndOf="@id/img_people"
+        app:layout_constraintTop_toTopOf="@id/img_people"
+        tools:text="12k followers   \u00b7  120 following" />
+
+    <ImageView
+        android:id="@+id/img_location"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="8dp"
+        android:src="@drawable/ic_outline_location_on_24"
+        app:layout_constraintStart_toStartOf="@id/img_people"
+        app:layout_constraintTop_toBottomOf="@id/img_people" />
+
+    <TextView
+        android:id="@+id/tv_location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="@id/tv_follow_info"
+        app:layout_constraintTop_toTopOf="@+id/img_location"
+        tools:text="Taipei, Taiwan" />
+
+    <ImageView
+        android:id="@+id/img_email"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="8dp"
+        android:src="@drawable/ic_outline_email_24"
+        app:layout_constraintStart_toStartOf="@id/img_location"
+        app:layout_constraintTop_toBottomOf="@id/img_location" />
+
+    <TextView
+        android:id="@+id/tv_email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="@id/tv_follow_info"
+        app:layout_constraintTop_toTopOf="@+id/img_email"
+        tools:text="wangshi@mihoyo" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
