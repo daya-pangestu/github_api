@@ -2,6 +2,8 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
+
 
 }
 
@@ -35,7 +37,9 @@ android {
         viewBinding true
     }
 }
-
+kapt {
+    correctErrorTypes true
+}
 dependencies {
 
     //glide
@@ -68,10 +72,10 @@ dependencies {
     implementation "androidx.room:room-ktx:2.4.0"
 
     //coroutine
-    api 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.0'
+    api 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2'
 
-    implementation "com.google.dagger:hilt-android:2.38.1"
-    kapt "com.google.dagger:hilt-compiler:2.38.1"
+    implementation "com.google.dagger:hilt-android:2.40.5"
+    kapt "com.google.dagger:hilt-compiler:2.40.5"
 
     //test-core
     debugImplementation "androidx.test:core-ktx:1.4.0"
@@ -105,8 +109,9 @@ dependencies {
     testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.4.3'
 
     //hilt
-    testImplementation "com.google.dagger:hilt-android-testing:2.37"
-    kaptTest "com.google.dagger:hilt-android-compiler:2.37"
+    androidTestImplementation  'com.google.dagger:hilt-android-testing:2.40.5'
+    kaptAndroidTest 'com.google.dagger:hilt-compiler:2.40.5'
+
 
     //room
     testImplementation "androidx.room:room-testing:2.4.0"
