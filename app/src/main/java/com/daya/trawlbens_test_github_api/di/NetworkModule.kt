@@ -34,7 +34,7 @@ object NetworkModule {
     fun provideRetrofit(okHttpClient: OkHttpClient) : Retrofit =
         Retrofit
         .Builder()
-        .baseUrl("www.github.com")
+        .baseUrl("https://api.github.com")
         .addConverterFactory(MoshiConverterFactory.create())
         .client(okHttpClient)
         .build()

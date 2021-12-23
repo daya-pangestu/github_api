@@ -1,9 +1,14 @@
 package com.daya.trawlbens_test_github_api.data
 
+import com.squareup.moshi.JsonClass
+
+@JsonClass(generateAdapter = true)
 data class GithubSearchResult(
     val items: List<Item>,
 )
 
+
+@JsonClass(generateAdapter = true)
 data class Item(
     val avatar_url: String,
     val events_url: String,
