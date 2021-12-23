@@ -51,6 +51,7 @@ interface GithubUserApiService {
     @GET("/search/users")
     fun searchUsers(
         @Query("q") query: String,
+        @Query("per_page")limit : Int = 10
     ): Call<GithubSearchResult>
     
 }
