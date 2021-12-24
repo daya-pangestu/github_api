@@ -4,12 +4,12 @@ import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
 data class GithubSearchResult(
-    val items: List<Item>,
+    val items: List<User>,
 )
 
 
 @JsonClass(generateAdapter = true)
-data class Item(
+data class User(
     val avatar_url: String,
     val events_url: String,
     val followers_url: String,
@@ -28,5 +28,25 @@ data class Item(
     val starred_url: String,
     val subscriptions_url: String,
     val type: String,
-    val url: String
+    val url: String,
+
+    //added info
+    @Transient
+    var bio: String = "",
+    @Transient
+    var followers: Int = 0,
+    @Transient
+    var following: Int = 0,
+    @Transient
+    var email: String = "",
+    @Transient
+    var twitterUserName: String = "",
+    @Transient
+    var public_repo :Int = 0,
+    @Transient
+    var location :String = "",
+
+    @Transient
+    var isExpanded :Boolean= false
+
 )

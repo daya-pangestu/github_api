@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:padding="16dp"
     >
 
@@ -37,7 +37,9 @@
         android:textSize="12sp"
         app:layout_constraintStart_toStartOf="@id/tv_name"
         app:layout_constraintTop_toBottomOf="@id/tv_name"
-        tools:text="---wangguan" />
+        tools:text="---wangguan"
+        android:visibility="gone"
+        />
 
     <TextView
         android:id="@+id/tv_bio"
@@ -52,10 +54,12 @@
         app:layout_constraintStart_toStartOf="@id/tv_account"
         app:layout_constraintTop_toBottomOf="@id/tv_account"
         app:layout_constraintVertical_bias="0"
-        tools:text="@tools:sample/lorem/random" />
+        tools:text="@tools:sample/lorem/random"
+        app:layout_constraintHorizontal_bias="0"
+        android:visibility="gone"
+        />
 
     <ImageView
-
         android:id="@+id/img_people"
         android:layout_width="20dp"
         android:layout_height="20dp"
@@ -69,11 +73,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="14sp"
+        android:layout_marginStart="12dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.1"
+        app:layout_constraintHorizontal_bias="0"
         app:layout_constraintStart_toEndOf="@id/img_people"
         app:layout_constraintTop_toTopOf="@id/img_people"
-        tools:text="12k followers   \u00b7  120 following" />
+        tools:text="12k followers   \u00b7  120 following"
+        />
 
     <ImageView
         android:id="@+id/img_location"
@@ -89,7 +95,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="14sp"
-        app:layout_constraintStart_toStartOf="@id/tv_follow_info"
+        app:layout_constraintStart_toEndOf="@id/img_location"
+        android:layout_marginStart="12dp"
         app:layout_constraintTop_toTopOf="@+id/img_location"
         tools:text="Taipei, Taiwan" />
 
@@ -107,9 +114,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="14sp"
-        app:layout_constraintStart_toStartOf="@id/tv_follow_info"
+        app:layout_constraintStart_toEndOf="@id/img_email"
+        android:layout_marginStart="12dp"
         app:layout_constraintTop_toTopOf="@+id/img_email"
         tools:text="wangshi@mihoyo" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

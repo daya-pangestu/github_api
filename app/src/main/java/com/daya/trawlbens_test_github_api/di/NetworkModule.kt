@@ -1,5 +1,6 @@
 package com.daya.trawlbens_test_github_api.di
 
+import com.daya.trawlbens_test_github_api.data.GithubDetailUser
 import com.daya.trawlbens_test_github_api.data.GithubSearchResult
 import dagger.Module
 import dagger.Provides
@@ -10,6 +11,7 @@ import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 import javax.inject.Singleton
 
@@ -51,8 +53,12 @@ interface GithubUserApiService {
     @GET("/search/users")
     fun searchUsers(
         @Query("q") query: String,
-        @Query("per_page")limit : Int = 10,
+        @Query("per_page")limit : Int = 5,
         @Query("page") page : Int = 1
     ): Call<GithubSearchResult>
-    
+
+    @GET("/users/{userLogin}")
+    suspend fun detailUser(
+        @Path("userLogin") userLogin : String
+    ): GithubDetailUser
 }
