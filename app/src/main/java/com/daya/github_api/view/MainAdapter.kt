@@ -1,4 +1,4 @@
-package com.daya.trawlbens_test_github_api.view
+package com.daya.github_api.view
 
 import android.text.SpannableStringBuilder
 import android.view.LayoutInflater
@@ -9,8 +9,8 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.daya.trawlbens_test_github_api.data.User
-import com.daya.trawlbens_test_github_api.databinding.ItemUserBinding
+import com.daya.github_api.data.User
+import com.daya.github_api.databinding.ItemUserBinding
 
 class MainAdapter : ListAdapter<User,MainAdapter.MainViewHolder>(diffUtil) {
 
@@ -32,6 +32,11 @@ class MainAdapter : ListAdapter<User,MainAdapter.MainViewHolder>(diffUtil) {
                 .into(binding.imgProfile)
 
             binding.tvName.text = item.login
+
+            itemView.setOnClickListener {
+                item.isExpanded = !item.isExpanded
+                notifyItemChanged(bindingAdapterPosition)
+            }
 
             //lazy load
             if (item.isExpanded) {
@@ -56,7 +61,6 @@ class MainAdapter : ListAdapter<User,MainAdapter.MainViewHolder>(diffUtil) {
             } else {
                 additionalItemVisible(false)
             }
-
         }
 
 

@@ -7,5 +7,5 @@ dependencyResolutionManagement {
         maven { url "https://jitpack.io" }
     }
 }
-rootProject.name = "TrawlBens_test_github_api"
+rootProject.name = "github_api"
 include ':app'

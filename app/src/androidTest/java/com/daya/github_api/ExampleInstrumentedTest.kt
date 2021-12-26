@@ -1,4 +1,4 @@
-package com.daya.trawlbens_test_github_api
+package com.daya.github_api
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

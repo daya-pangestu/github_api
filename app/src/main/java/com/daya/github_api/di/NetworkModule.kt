@@ -1,7 +1,9 @@
-package com.daya.trawlbens_test_github_api.di
+package com.daya.github_api.di
 
-import com.daya.trawlbens_test_github_api.data.GithubDetailUser
-import com.daya.trawlbens_test_github_api.data.GithubSearchResult
+import com.daya.github_api.NullAbleStringFieldAdapter
+import com.daya.github_api.data.GithubDetailUser
+import com.daya.github_api.data.GithubSearchResult
+import com.squareup.moshi.Moshi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -33,11 +35,18 @@ object NetworkModule {
 
     @Provides
     @Singleton
-    fun provideRetrofit(okHttpClient: OkHttpClient) : Retrofit =
+    fun provideMoshi() : Moshi = Moshi
+        .Builder()
+        .add(NullAbleStringFieldAdapter)
+        .build()
+
+    @Provides
+    @Singleton
+    fun provideRetrofit(okHttpClient: OkHttpClient,moshi: Moshi) : Retrofit =
         Retrofit
         .Builder()
         .baseUrl("https://api.github.com")
-        .addConverterFactory(MoshiConverterFactory.create())
+        .addConverterFactory(MoshiConverterFactory.create(moshi))
         .client(okHttpClient)
         .build()
 

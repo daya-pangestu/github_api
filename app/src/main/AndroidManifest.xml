@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.daya.trawlbens_test_github_api">
+    package="com.daya.github_api">
 
     <uses-permission android:name="android.permission.INTERNET"/>
 
@@ -10,10 +10,10 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:name=".TrawlbensTest"
+        android:name="com.daya.github_api.GithubApiApp"
         android:theme="@style/Theme.TrawlBens_test_github_api">
         <activity
-            android:name=".view.MainActivity"
+            android:name="com.daya.github_api.view.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

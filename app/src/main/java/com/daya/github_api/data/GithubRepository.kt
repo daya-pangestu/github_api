@@ -1,12 +1,14 @@
-package com.daya.trawlbens_test_github_api.data
+package com.daya.github_api.data
 
-import com.daya.trawlbens_test_github_api.di.GithubUserApiService
+import android.util.Log
+import com.daya.github_api.di.GithubUserApiService
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.suspendCancellableCoroutine
 import retrofit2.Call
 import retrofit2.Callback
+import retrofit2.HttpException
 import retrofit2.Response
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -21,7 +23,7 @@ constructor(
 ){
 
     @OptIn(ExperimentalCoroutinesApi::class)
-    fun searchUser(query: String) = callbackFlow<List<User>> {
+    suspend fun searchUser(query: String) = suspendCancellableCoroutine<List<User>> { continuation ->
        val client =  apiService.searchUsers(query)
         client.enqueue(object : Callback<GithubSearchResult> {
             override fun onResponse(
@@ -29,27 +31,26 @@ constructor(
                 response: Response<GithubSearchResult>
             ) {
                 val body = response.body()
-                if (body == null) {
-                    this@callbackFlow.close(NoSuchElementException("something happening in the succesfull response body"))
-                    return
-                }
-                this@callbackFlow.trySend(body.items)
+                    ?: return continuation.resumeWithException(Throwable("something happening in the succesfull response body, ${response.message()}"))
 
+                continuation.resume(body.items)
             }
 
             override fun onFailure(call: Call<GithubSearchResult>, t: Throwable) {
-                this@callbackFlow.close(t)
+                continuation.cancel(t)
             }
         })
-        awaitClose {
+
+        continuation.invokeOnCancellation {
             client.cancel()
         }
     }
 
-    suspend fun completingData(incompleteData: List<User>): List<User> {
+   suspend fun completingData(incompleteData: List<User>): List<User> {
         return incompleteData
             .map {
                 val detail = apiService.detailUser(it.login)
+
                 it.bio = detail.bio
                 it.followers = detail.followers
                 it.following = detail.following
@@ -59,6 +60,5 @@ constructor(
                 it.location = detail.location
                 it
             }
-
     }
 }

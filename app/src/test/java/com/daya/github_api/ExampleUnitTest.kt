@@ -1,4 +1,4 @@
-package com.daya.trawlbens_test_github_api
+package com.daya.github_api
 
 import org.junit.Test
 

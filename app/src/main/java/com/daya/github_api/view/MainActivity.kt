@@ -1,22 +1,19 @@
-package com.daya.trawlbens_test_github_api.view
+package com.daya.github_api.view
 
 import android.app.Activity
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat.getSystemService
-import androidx.core.content.ContextCompat.getSystemServiceName
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.daya.trawlbens_test_github_api.databinding.ActivityMainBinding
+import com.daya.github_api.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -37,14 +34,9 @@ class MainActivity : AppCompatActivity() {
         binding.rv.setHasFixedSize(true)
         binding.rv.adapter = mainAdapter
 
-        lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.CREATED){
-                viewmModel.queryFlow.collect {
-                    mainAdapter.submitList(it)
-                }
-            }
+        viewmModel.queryFlow.observe(this){
+            mainAdapter.submitList(it)
         }
-
         binding.search.doOnEnter { view, text ->
             viewmModel.setQuery(text)
             hideKeyboard(binding.search)

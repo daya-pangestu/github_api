@@ -1,4 +1,4 @@
-package com.daya.trawlbens_test_github_api.data
+package com.daya.github_api.data
 
 import com.squareup.moshi.JsonClass
 
