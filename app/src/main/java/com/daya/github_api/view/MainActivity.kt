@@ -13,7 +13,10 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.daya.github_api.R
 import com.daya.github_api.databinding.ActivityMainBinding
+import com.faltenreich.skeletonlayout.Skeleton
+import com.faltenreich.skeletonlayout.applySkeleton
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -23,6 +26,8 @@ class MainActivity : AppCompatActivity() {
 
     lateinit var binding: ActivityMainBinding
     private val viewmModel by viewModels<MainViewModel>()
+
+    lateinit var skeleton : Skeleton
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,12 +39,16 @@ class MainActivity : AppCompatActivity() {
         binding.rv.setHasFixedSize(true)
         binding.rv.adapter = mainAdapter
 
+        skeleton = binding.rv.applySkeleton(R.layout.item_user)
+
         viewmModel.queryFlow.observe(this){
             mainAdapter.submitList(it)
+            if (it.isNullOrEmpty()) skeleton.showOriginal()
         }
-        binding.search.doOnEnter { view, text ->
+        binding.search.doOnEnter { _, text ->
             viewmModel.setQuery(text)
             hideKeyboard(binding.search)
+            skeleton.showSkeleton()
         }
     }
 }
