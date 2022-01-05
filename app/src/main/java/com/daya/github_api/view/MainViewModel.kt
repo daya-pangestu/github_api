@@ -3,7 +3,9 @@ package com.daya.github_api.view
 import androidx.lifecycle.*
 import androidx.test.core.app.launchActivity
 import com.daya.github_api.data.GithubRepository
+import com.daya.github_api.data.Resource
 import com.daya.github_api.data.User
+import com.daya.github_api.usecase.GetUserSearchUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.*
@@ -14,24 +16,20 @@ class MainViewModel
 @Inject
 constructor(
     private val savedStateHandle: SavedStateHandle,
-    private val repository: GithubRepository
+    private val getUserSearchUseCase: GetUserSearchUseCase
 ) : ViewModel() {
 
     val queryFlow = savedStateHandle.getLiveData<String>(KEY_QUERY)
         .switchMap {
             liveData {
-                val incompleteData = repository.searchUser(it) //only contain name,avatar
-                val completedData =  completingData(incompleteData)
-                emit(completedData)
+                emit(Resource.loading())
+                val data = getUserSearchUseCase(it)
+                emit(data)
             }
         }
 
     fun setQuery(query: String) {
         savedStateHandle.set(KEY_QUERY,query)
-    }
-
-    suspend fun completingData(incompleteData: List<User>): List<User> {
-        return repository.completingData(incompleteData)
     }
 
     companion object{

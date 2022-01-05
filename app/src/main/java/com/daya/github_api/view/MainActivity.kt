@@ -7,6 +7,7 @@ import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Lifecycle
@@ -14,6 +15,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.daya.github_api.R
+import com.daya.github_api.data.Resource
 import com.daya.github_api.databinding.ActivityMainBinding
 import com.faltenreich.skeletonlayout.Skeleton
 import com.faltenreich.skeletonlayout.applySkeleton
@@ -42,13 +44,24 @@ class MainActivity : AppCompatActivity() {
         skeleton = binding.rv.applySkeleton(R.layout.item_user)
 
         viewmModel.queryFlow.observe(this){
-            mainAdapter.submitList(it)
-            if (it.isNullOrEmpty()) skeleton.showOriginal()
+            when (it) {
+                is Resource.Loading ->{
+                    skeleton.showSkeleton()
+                }
+                is Resource.Success ->{
+                    mainAdapter.submitList(it.data)
+                    if (it.data.isNullOrEmpty()) skeleton.showOriginal()
+
+                }
+                is Resource.Error ->{
+                    skeleton.showOriginal()
+                    Toast.makeText(this@MainActivity, it.exceptionMessage, Toast.LENGTH_SHORT).show()
+                }
+            }
         }
         binding.search.doOnEnter { _, text ->
             viewmModel.setQuery(text)
             hideKeyboard(binding.search)
-            skeleton.showSkeleton()
         }
     }
 }
