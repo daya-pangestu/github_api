@@ -64,18 +64,18 @@ class MainActivity : AppCompatActivity() {
             hideKeyboard(binding.search)
         }
     }
-}
 
-private fun EditText.doOnEnter(action: (EditText,String) -> Unit) {
-    setOnEditorActionListener { _, actionId, _ ->
-        if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-            action(this,this.text.toString())
+    private fun EditText.doOnEnter(action: (EditText,String) -> Unit) {
+        setOnEditorActionListener { _, actionId, _ ->
+            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                action(this,this.text.toString())
+            }
+            true
         }
-        true
     }
-}
 
-fun Context.hideKeyboard(view: View) {
-    val inputMethodManager = getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
-    inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
+    private fun Context.hideKeyboard(view: View) {
+        val inputMethodManager = getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+        inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
+    }
 }
