@@ -1,8 +1,8 @@
 package com.daya.github_api.di
 
-import com.daya.github_api.NullAbleStringFieldAdapter
 import com.daya.github_api.data.GithubDetailUser
 import com.daya.github_api.data.GithubSearchResult
+import com.daya.github_api.utils.NullAbleStringFieldAdapter
 import com.squareup.moshi.Moshi
 import dagger.Module
 import dagger.Provides

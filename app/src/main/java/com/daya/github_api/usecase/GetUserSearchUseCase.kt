@@ -3,7 +3,6 @@ package com.daya.github_api.usecase
 import com.daya.github_api.data.GithubRepository
 import com.daya.github_api.data.User
 import com.daya.github_api.di.coroutine.IoDispatcher
-import com.daya.github_api.utils.UseCase
 import kotlinx.coroutines.CoroutineDispatcher
 import javax.inject.Inject
 

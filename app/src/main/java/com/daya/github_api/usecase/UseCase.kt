@@ -1,4 +1,4 @@
-package com.daya.github_api.utils
+package com.daya.github_api.usecase
 
 import com.daya.github_api.data.Resource
 import kotlinx.coroutines.CoroutineDispatcher

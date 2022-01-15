@@ -1,4 +1,4 @@
-package com.daya.github_api
+package com.daya.github_api.utils
 
 import com.squareup.moshi.FromJson
 import com.squareup.moshi.JsonQualifier

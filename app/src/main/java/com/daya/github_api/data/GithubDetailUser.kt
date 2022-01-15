@@ -1,6 +1,6 @@
 package com.daya.github_api.data
 
-import com.daya.github_api.NullableStringField
+import com.daya.github_api.utils.NullableStringField
 import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)

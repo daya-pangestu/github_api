@@ -2,6 +2,7 @@ package com.daya.github_api.view
 
 import android.app.Activity
 import android.content.Context
+import android.graphics.Rect
 import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.EditorInfo
@@ -10,24 +11,25 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
 import com.daya.github_api.R
 import com.daya.github_api.data.Resource
 import com.daya.github_api.databinding.ActivityMainBinding
 import com.faltenreich.skeletonlayout.Skeleton
 import com.faltenreich.skeletonlayout.applySkeleton
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     lateinit var binding: ActivityMainBinding
-    private val viewmModel by viewModels<MainViewModel>()
+    private val viewModel by viewModels<MainViewModel>()
 
     lateinit var skeleton : Skeleton
 
@@ -35,7 +37,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
         val mainAdapter = MainAdapter()
         binding.rv.layoutManager = LinearLayoutManager(this)
         binding.rv.setHasFixedSize(true)
@@ -43,7 +44,7 @@ class MainActivity : AppCompatActivity() {
 
         skeleton = binding.rv.applySkeleton(R.layout.item_user)
 
-        viewmModel.queryFlow.observe(this){
+        viewModel.queryFlow.observe(this){
             when (it) {
                 is Resource.Loading ->{
                     skeleton.showSkeleton()
@@ -59,9 +60,9 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
-        binding.search.doOnEnter { _, text ->
-            viewmModel.setQuery(text)
-            hideKeyboard(binding.search)
+        binding.edtSearch.doOnEnter { _, text ->
+            viewModel.setQuery(text)
+            hideKeyboard(binding.edtSearch)
         }
     }
 

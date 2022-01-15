@@ -31,7 +31,7 @@ constructor(
                 response: Response<GithubSearchResult>
             ) {
                 val body = response.body()
-                    ?: return continuation.resumeWithException(Throwable("something happening in the succesfull response body, ${response.message()}"))
+                    ?: return continuation.resumeWithException(Throwable("something happening in the succesfull response body, ${response.errorBody()?.string()}"))
 
                 continuation.resume(body.items)
             }
