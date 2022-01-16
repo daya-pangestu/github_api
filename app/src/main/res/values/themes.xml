@@ -14,5 +14,6 @@
         <item name="android:windowLightStatusBar" tools:ignore="NewApi">true</item>
 
         <!-- Customize your theme here. -->
+        <item name="searchBackgroundColor">#F5F5F5</item>
     </style>
 </resources>

@@ -14,5 +14,7 @@
         <!-- Customize your theme here. -->
         <item name="android:windowTranslucentStatus">true</item>
         <item name="android:fitsSystemWindows">true</item>
+
+        <item name="searchBackgroundColor">#0a0a0a</item>
     </style>
 </resources>

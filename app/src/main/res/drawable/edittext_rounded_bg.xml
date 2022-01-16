@@ -4,6 +4,6 @@
         android:width="2dp"
         android:color="@android:color/transparent"
         />
-    <solid android:color="#F5F5F5"/>
+    <solid android:color="?attr/searchBackgroundColor"/>
     <corners android:radius="8dp"/>
 </shape>
